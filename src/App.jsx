@@ -9,6 +9,7 @@ function App() {
     <div>
       <Dashboard />
       <Routes>
+        
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/student' element={<Student />}/>
       </Routes>
