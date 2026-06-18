@@ -36,7 +36,7 @@ function Dashboard() {
   const [groups, setGroups] = useState([]);
   const [students, setStudents] = useState([]);
   // const [selectedGroup, setSelectedGroup] = useState(null);
-  const [ setSelectedGroup] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
 
   const [groupForm, setGroupForm] = useState({
     kurs: "",
@@ -45,13 +45,12 @@ function Dashboard() {
     vaqt: "",
     xona: "",
     markaz: "",
-    
   });
 
   const [studentForm, setStudentForm] = useState({
     ism: "",
     familiya: "",
-    kurs: "",
+    groupId: "",
     telefon: "",
     manzil: "",
     tolov: false,
@@ -64,7 +63,7 @@ function Dashboard() {
 
   const getGroups = async () => {
     try {
-      const res = await fetch("http://localhost:3000/groups");
+      const res = await fetch("https://692eb13d91e00bafccd4de97.mockapi.io/groups");
       const data = await res.json();
       setGroups(data);
     } catch (err) {
@@ -74,7 +73,7 @@ function Dashboard() {
 
   const getStudents = async () => {
     try {
-      const res = await fetch("http://localhost:3000/students");
+      const res = await fetch("https://6a2d63d92edd4cb330d11ac2.mockapi.io/students");
       const data = await res.json();
       setStudents(data);
     } catch (err) {
@@ -125,12 +124,12 @@ function Dashboard() {
         markaz: "",
       });
 
-      toast.success("Guruh qo'shildi ✅");
+      toast.success("Guruh qo'shildi ");
 
       setShowGroupForm(false);
     } catch (err) {
       console.log(err);
-      toast.error("Xatolik yuz berdi ❌");
+      toast.error("Xatolik yuz berdi ");
     }
   };
 
@@ -138,7 +137,7 @@ function Dashboard() {
     if (
       !studentForm.ism.trim() ||
       !studentForm.familiya.trim() ||
-      !studentForm.kurs.trim() ||
+      !studentForm.groupId ||
       !studentForm.telefon.trim() ||
       !studentForm.manzil.trim()
     ) {
@@ -170,10 +169,9 @@ function Dashboard() {
       setStudentForm({
         ism: "",
         familiya: "",
-        kurs: "",
+        groupId: "",
         telefon: "",
         manzil: "",
-        groupId: "",
         tolov: false,
       });
 
@@ -208,6 +206,8 @@ function Dashboard() {
       <Main>
         <Header>
           <h2>Dashboard User</h2>
+ 
+            
 
           <MenuWrapper>
             <Button onClick={() => setOpenMenu(!openMenu)}>☰</Button>
