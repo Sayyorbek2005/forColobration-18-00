@@ -498,9 +498,11 @@ function Dashboard() {
               ))}
             </div>
           </ChartBox>
-        )}
+        )}       
       </Main>
     </Container>
+
+        
   );
 }
    
