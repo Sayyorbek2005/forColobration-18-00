@@ -4,10 +4,11 @@ export const Container = styled.div`
   display: flex;
   min-height: 100vh;
   background: #eef1f5;
+
 `;
 
 export const Sidebar = styled.div`
-  width: 250px;
+  width: 250px;   
   background: #0d3761;
   color: white;
   padding: 30px 20px;
