@@ -47,7 +47,8 @@ function Dashboard() {
 
   const [groups, setGroups] = useState([]);
   const [students, setStudents] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(null); // TUG'IRLANDI: setSelectedGroup noto'g'ri e'lon qilingan edi
+  // eslint-disable-next-line no-unused-vars
+  const [selectedGroup, setSelectedGroup] = useState(null); 
 
   const [users, setUsers] = useState([
     { 
@@ -81,12 +82,10 @@ function Dashboard() {
   const [amaliyotForm, setAmaliyotForm] = useState({ fullname: '', link: '', kurs: 'React guruh' });
   const [testForm, setTestForm] = useState({ fullname: '', belgilanganJavoblar: {}, isSubmited: false });
 
-  // TUG'IRLANDI: Toastlar bir-birining ketidan tiqilib qolmasligi va o'chmay qolmasligi uchun majburiy tozalash mexanizmi
   const showToast = (type, message) => {
-    toast.clearWaitingQueue(); // Navbatda navbat kutib yig'ilib qolgan xabarlarni tozalaydi
-    toast.dismiss();           // Ekranda hozirgina chiqib turgan xabarni darhol o'chiradi
+    toast.clearWaitingQueue(); 
+    toast.dismiss();          
 
-    // Render chalkashib ketmasligi uchun 50ms kechikish bilan yangi xabarni chiqaramiz
     setTimeout(() => {
       if (type === "success") {
         toast.success(message);
@@ -101,23 +100,26 @@ function Dashboard() {
     getStudents();
   }, []);
 
+  // DIQQAT: URL manzillar MockAPI yoki onlayn API bo'lishi shart! (Hozircha xato bermasligi uchun MockAPI url qo'yishingiz tavsiya etiladi)
   const getGroups = async () => {
     try {
-      const res = await fetch("http://localhost:3000/groups");
+      const res = await fetch("https://692eb13d91e00bafccd4de97.mockapi.io/groups");
+      if (!res.ok) throw new Error("Guruhlarni yuklashda xatolik");
       const data = await res.json();
       setGroups(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   const getStudents = async () => {
     try {
-      const res = await fetch("http://localhost:3000/students");
+      const res = await fetch("https://6a2d63d92edd4cb330d11ac2.mockapi.io/students");
+      if (!res.ok) throw new Error("Talabalarni yuklashda xatolik");
       const data = await res.json();
       setStudents(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -246,16 +248,15 @@ function Dashboard() {
 
   return (
     <Container>
-      {/* TUG'IRLANDI: toastlar qotib qolmasligi va sichqoncha berganda to'xtamasligi uchun optimal xususiyatlar */}
       <ToastContainer 
         position="top-right"
-        autoClose={2000}             // 2 soniyada o'chadi
-        hideProgressBar={true}       // Progress bar ba'zida UI muzlashiga olib kelishi sabab o'chirildi
+        autoClose={2000}             
+        hideProgressBar={true}       
         newestOnTop={true} 
         closeOnClick={true}
-        pauseOnFocusLoss={false}     // Boshqa tabga o'tib qaytganda qotib qolmaydi
-        pauseOnHover={false}         // Sichqoncha ustida turganda ham vaqt tugashi bilan o'chib ketadi!
-        limit={1}                    // Sahifada bir vaqtning o'zida faqat 1 dona toast chiqadi
+        pauseOnFocusLoss={false}     
+        pauseOnHover={false}         
+        limit={1}                    
       />
       
       <Sidebar>
@@ -439,14 +440,22 @@ function Dashboard() {
 
               <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
                 <p><strong>1-Savol:</strong> React-da component nima?</p>
-                <label><input type="radio" name="q1" onChange={() => setTestForm({...testForm, belgilanganJavoblar: {...testForm.belgilanganJavoblar, q1: true}})} /> Qayta ishlatiladigan kod bo'lagi</label> <br/>
-                <label><input type="radio" name="q1" /> Ma'lumotlar bazasi</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  <input type="radio" name="q1" onChange={() => setTestForm({...testForm, belgilanganJavoblar: {...testForm.belgilanganJavoblar, q1: true}})} /> Qayta ishlatiladigan kod bo'lagi
+                </label>
+                <label style={{ display: 'block' }}>
+                  <input type="radio" name="q1" /> Ma'lumotlar bazasi
+                </label>
               </div>
 
               <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
                 <p><strong>2-Savol:</strong> useState nima uchun ishlatiladi?</p>
-                <label><input type="radio" name="q2" onChange={() => setTestForm({...testForm, belgilanganJavoblar: {...testForm.belgilanganJavoblar, q2: true}})} /> State (holat)ni saqlash uchun</label> <br/>
-                <label><input type="radio" name="q2" /> Stil berish uchun</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  <input type="radio" name="q2" onChange={() => setTestForm({...testForm, belgilanganJavoblar: {...testForm.belgilanganJavoblar, q2: true}})} /> State (holat)ni saqlash uchun
+                </label>
+                <label style={{ display: 'block' }}>
+                  <input type="radio" name="q2" /> Stil berish uchun
+                </label>
               </div>
 
               <Button type="submit">Natijani botga va Userlarga yuborish</Button>
@@ -501,12 +510,7 @@ function Dashboard() {
         )}       
       </Main>
     </Container>
-
-        
   );
 }
-   
-
-
 
 export default Dashboard;
