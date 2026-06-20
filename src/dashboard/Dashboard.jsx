@@ -52,7 +52,7 @@ function Dashboard() {
 
   const [groups, setGroups] = useState([]);
   const [students, setStudents] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [ setSelectedGroup] = useState(null);
 
   // Global foydalanuvchilar ro'yxati (Ikkinchi koddagi ma'lumotlar)
   const [users, setUsers] = useState([
