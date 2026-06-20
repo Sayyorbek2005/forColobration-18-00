@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   min-height: 100vh;
   background: #eef1f5;
+
 `;
 
 export const Sidebar = styled.div`
