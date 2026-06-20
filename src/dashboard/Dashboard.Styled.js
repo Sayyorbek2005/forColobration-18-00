@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Sidebar = styled.div`
-  width: 250px;
+  width: 250px;   
   background: #0d3761;
   color: white;
   padding: 30px 20px;
